@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4058c670-eef0-454e-a23c-67ec280d4fd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{af9f5881-a32c-4ec1-ac3b-b796fbecf90f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{5ba85ca4-e536-48db-934f-9315760823c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SatMath">
+      <UniqueIdentifier>{c12342e5-b643-4944-8937-dc3fd536e08f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SatMath\sys">
+      <UniqueIdentifier>{14e0ffab-4883-4f32-a514-50503e97f481}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\include">
+      <UniqueIdentifier>{ed8c51f6-d8d6-4453-9a92-a2c63ce3bb63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\include\uniform">
+      <UniqueIdentifier>{5d4469ec-818c-4930-a48b-0034e2725331}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\include\math">
+      <UniqueIdentifier>{48d6f06d-bb86-415e-b031-95e6762ec016}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scenes">
+      <UniqueIdentifier>{189c4d64-fe2e-4013-a2dc-6a63e3d73eab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine">
+      <UniqueIdentifier>{d18391a9-409a-4237-a62c-a2f5a9d9e6f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics">
+      <UniqueIdentifier>{52e628bd-2ccb-40f6-98fb-3af22094d5ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui">
+      <UniqueIdentifier>{48eee1c6-cff9-43e9-8dc2-a0f677346d2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gmtk">
+      <UniqueIdentifier>{4e57c5ee-0b10-4526-a3c2-10d4259dd3cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gmtk\internal">
+      <UniqueIdentifier>{d89d3cb8-41fc-43a4-8f36-69b313f8ccce}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseEffect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AniMath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameBuffer.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshDynamic.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderProgram.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureCube.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="UniformBuffer.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeSplitterMenuScene.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="IO.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_demo.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_draw.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_impl.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="CGAssignment3Scene.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="include\SatMath\Rect.cpp">
+      <Filter>SatMath</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexBufferObject.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="FontMatrixScrolling.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FileManager.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleEmitter.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultScene.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\SatMath\sys\IgnoreWarning.h">
+      <Filter>SatMath\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="sys\IgnoreWarningUndef.h">
+      <Filter>SatMath\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="AniMath.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseEffect.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Source Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshDynamic.h">
+      <Filter>Source Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Source Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderManager.h">
+      <Filter>Source Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderProgram.h">
+      <Filter>Source Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Source Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureCube.h">
+      <Filter>Source Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="UniformBuffer.h">
+      <Filter>Source Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeSplitterMenuScene.h">
+      <Filter>Source Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="IO.h">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Source Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imgui.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imgui_impl.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imgui_internal.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\stb_rect_pack.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\stb_textedit.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\stb_truetype.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="CGAssignment3Scene.h">
+      <Filter>Source Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imconfig.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SatMath\Rect.h">
+      <Filter>SatMath</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexBufferObject.h">
+      <Filter>Source Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Source Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameBuffer.h">
+      <Filter>Source Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="FontMatrixScrolling.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileManager.h">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmtk\angle.h">
+      <Filter>gmtk</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmtk\gmtk.h">
+      <Filter>gmtk</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmtk\half.h">
+      <Filter>gmtk</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmtk\matrix.h">
+      <Filter>gmtk</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmtk\quaternion.h">
+      <Filter>gmtk</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmtk\util.h">
+      <Filter>gmtk</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmtk\vector.h">
+      <Filter>gmtk</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmtk\internal\mat3.h">
+      <Filter>gmtk\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmtk\internal\mat4.h">
+      <Filter>gmtk\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmtk\internal\quat.h">
+      <Filter>gmtk\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmtk\internal\swizzle2.h">
+      <Filter>gmtk\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmtk\internal\swizzle3.h">
+      <Filter>gmtk\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmtk\internal\swizzle4.h">
+      <Filter>gmtk\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmtk\internal\vec.h">
+      <Filter>gmtk\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmtk\internal\vec2.h">
+      <Filter>gmtk\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmtk\internal\vec3.h">
+      <Filter>gmtk\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmtk\internal\vec4.h">
+      <Filter>gmtk\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmtk\internal\mat.h">
+      <Filter>gmtk\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmtk\internal\mat2.h">
+      <Filter>gmtk\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleEmitter.h">
+      <Filter>Source Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Source Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultScene.h">
+      <Filter>Source Files\Scenes</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\assets\shaders\error.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\assets\shaders\error.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\assets\shaders\PassThrough.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\assets\shaders\PassThrough.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\assets\shaders\PassThroughColor.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\assets\shaders\PassThroughColor.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\assets\shaders\shader.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\assets\shaders\shader.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\assets\shaders\shaderTexture.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\assets\shaders\shaderUnlit.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\assets\shaders\shaderUnlitAlphaColor.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\assets\shaders\terrain.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\assets\shaders\terrain.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\assets\shaders\water.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\assets\shaders\water.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\assets\shaders\pauseEffect.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\assets\shaders\include\math\random.glsl">
+      <Filter>Shaders\include\math</Filter>
+    </None>
+    <None Include="..\assets\shaders\include\uniform\Camera.glsl">
+      <Filter>Shaders\include\uniform</Filter>
+    </None>
+    <None Include="..\assets\shaders\include\uniform\Time.glsl">
+      <Filter>Shaders\include\uniform</Filter>
+    </None>
+    <None Include="..\assets\shaders\include\uniform\Fog.glsl">
+      <Filter>Shaders\include\uniform</Filter>
+    </None>
+    <None Include="..\assets\shaders\include\uniform\_GlobalBindings.glsl">
+      <Filter>Shaders\include\uniform</Filter>
+    </None>
+    <None Include="..\assets\shaders\include\vData.glsl">
+      <Filter>Shaders\include</Filter>
+    </None>
+    <None Include="..\assets\shaders\include\math\core.glsl">
+      <Filter>Shaders\include\math</Filter>
+    </None>
+    <None Include="include\gmtk\LICENSE.md">
+      <Filter>gmtk</Filter>
+    </None>
+    <None Include="include\gmtk\README.md">
+      <Filter>gmtk</Filter>
+    </None>
+    <None Include="..\assets\shaders\Particle.geom">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\assets\shaders\Particle.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\assets\shaders\Particle.frag">
+      <Filter>Shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>
