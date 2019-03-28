@@ -30,10 +30,12 @@ void updateParticleForce(ParticleEmitter* particleSystem)
 	//revered loops
 	for (size_t k = forceLocations.size()-1; k > 0; --k)
 	{
+		//moved force locations out
+		vec3 forceLoc = forceLocations[k];
 		for (unsigned int idx = particleSystem->getNumParticles()-1; idx >0; --idx)
 		{
 			//split clamp into 3 instead of using vector
-			vec3 force = vec3(1.0f) / (forceLocations[k] - particleSystem->getParticlePosition(idx));
+			vec3 force = vec3(1.0f) / (forceLoc - particleSystem->getParticlePosition(idx));
 			clamp(force.x, -10.0f, 10.0f);
 			clamp(force.y, -10.0f, 10.0f);
 			clamp(force.z, -10.0f, 10.0f);
@@ -98,9 +100,11 @@ void DefaultScene::update(float dt)
 	float rainbowSpeed = 2.5f;
 	float rainbowFrequency = -0.01f;
 	textTest.update(dt);
+	//alpha made
+	float alpha = rainbowFrequency + m_pTimeSinceLoad * rainbowSpeed;
 	for (size_t i = 0; i < textTest.data.size(); ++i)
 	{
-		float offsetAmount = (textTest.data[i].x + textTest.data[i].y) * rainbowFrequency + m_pTimeSinceLoad * rainbowSpeed;
+		float offsetAmount = (textTest.data[i].x + textTest.data[i].y) * alpha;
 		textTest.data[i].color = vec4(
 			sinf(offsetAmount),
 			sinf(offsetAmount + f_pi / 3.0f * 2.0f),
