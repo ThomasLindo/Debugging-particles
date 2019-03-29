@@ -13,9 +13,9 @@ struct MeshFace
 {
 	MeshFace()
 	{
-		vertices[0] = 0;
 		vertices[1] = 0;
 		vertices[2] = 0;
+		vertices[3] = 0;
 
 		textureUVs[0] = 0;
 		textureUVs[1] = 0;
@@ -24,15 +24,29 @@ struct MeshFace
 		normals[0] = 0;
 		normals[1] = 0;
 		normals[2] = 0;
+
+		//vertices1 = 0;
+		//vertices2 = 0;
+		//vertices3 = 0;
+
+
+		//textureUVs1 = 0;
+		//textureUVs2 = 0;
+		//textureUVs3 = 0;
+
+
+		//normals1 = 0;
+		//normals2 = 0;
+		//normals3 = 0;
 	}
 
 	MeshFace(unsigned v1, unsigned v2, unsigned v3,
 		unsigned u1, unsigned u2, unsigned u3,
 		unsigned n1, unsigned n2, unsigned n3)
 	{
-		vertices[0] = v1;
-		vertices[1] = v2;
-		vertices[2] = v3;
+		vertices[1] = v1;
+		vertices[2] = v2;
+		vertices[3] = v3;
 
 		textureUVs[0] = u1;
 		textureUVs[1] = u2;
@@ -41,13 +55,33 @@ struct MeshFace
 		normals[0] = n1;
 		normals[1] = n2;
 		normals[2] = n3;
+
+		//vertices1 = v1;
+		//vertices2 = v2;
+		//vertices3 = v3;
+
+
+		//textureUVs1 = u1;
+		//textureUVs2 = u2;
+		//textureUVs3 = u3;
+
+
+		//normals1 = n1;
+		//normals2 = n2;
+		//normals3 = n3;
 	}
 
 	unsigned vertices[3];
 	unsigned textureUVs[3];
 	unsigned normals[3];
-	unsigned tangent[3];
-	unsigned bitangent[3];
+	//unsigned tangent[3];
+	//unsigned bitangent[3];
+
+	//unsigned tangent1, tangent2, tangent3;
+	//unsigned bitangent1, bitangent2, bitangent3;
+	//unsigned vertices1, vertices2, vertices3;
+	//unsigned textureUVs1, textureUVs2, textureUVs3;
+	//unsigned normals1, normals2, normals3;
 };
 
 void Mesh::initMeshSphere(const unsigned int xSlices, const unsigned int ySlices)
@@ -410,6 +444,10 @@ bool Mesh::loadFromObj(const std::string & file)
 				&faceTemp.vertices[0], &faceTemp.textureUVs[0], &faceTemp.normals[0],
 				&faceTemp.vertices[1], &faceTemp.textureUVs[1], &faceTemp.normals[1],
 				&faceTemp.vertices[2], &faceTemp.textureUVs[2], &faceTemp.normals[2]);
+
+			//&faceTemp.vertices1, &faceTemp.textureUVs1, &faceTemp.normals1,
+			//	&faceTemp.vertices2, &faceTemp.textureUVs2, &faceTemp.normals2,
+			//	&faceTemp.vertices3, &faceTemp.textureUVs3, &faceTemp.normals3);
 			faceData.push_back(faceTemp);
 			break;
 		case 'o':
@@ -426,11 +464,12 @@ bool Mesh::loadFromObj(const std::string & file)
 	{
 		for (unsigned j = 0; j < 3; j++)
 		{
-			vec4 data = vec4(
-				vertexDataLoad[faceData[i].vertices[j] - 1].x,
-				vertexDataLoad[faceData[i].vertices[j] - 1].y,
-				vertexDataLoad[faceData[i].vertices[j] - 1].z,
-				1.0f);
+			//vec4 data = vec4(
+			//	vertexDataLoad[faceData[i].vertices[j] - 1].x,
+			//	vertexDataLoad[faceData[i].vertices[j] - 1].y,
+			//	vertexDataLoad[faceData[i].vertices[j] - 1].z,
+			//	1.0f);
+
 			dataVertex.push_back(vec4(
 				vertexDataLoad[faceData[i].vertices[j] - 1].x,
 				vertexDataLoad[faceData[i].vertices[j] - 1].y,
@@ -448,7 +487,80 @@ bool Mesh::loadFromObj(const std::string & file)
 				normalDataLoad[faceData[i].normals[j] - 1].y,
 				normalDataLoad[faceData[i].normals[j] - 1].z,
 				1.0f));
+
+			dataVertex.push_back(vec4(
+				vertexDataLoad[faceData[i].vertices[j] - 1].x,
+				vertexDataLoad[faceData[i].vertices[j] - 1].y,
+				vertexDataLoad[faceData[i].vertices[j] - 1].z,
+				1.0f));
+
+
+			dataTexture.push_back(vec4(
+				textureDataLoad[faceData[i].textureUVs[j] - 1].x,
+				textureDataLoad[faceData[i].textureUVs[j] - 1].y,
+				0.0f,
+				1.0f));
+
+
+			dataNormal.push_back(vec4(
+				normalDataLoad[faceData[i].normals[j] - 1].x,
+				normalDataLoad[faceData[i].normals[j] - 1].y,
+				normalDataLoad[faceData[i].normals[j] - 1].z,
+				1.0f));
 		}
+
+
+		//IGNORE//
+
+			//data.push_back(vec4(
+			//	vertexDataLoad[faceData[i].vertices1 - 1].x,
+			//	vertexDataLoad[faceData[i].vertices1 - 1].y,
+			//	vertexDataLoad[faceData[i].vertices1 - 1].z,
+			//	1.0f));
+			//data.push_back(vec4(
+			//	vertexDataLoad[faceData[i].vertices2 - 1].x,
+			//	vertexDataLoad[faceData[i].vertices2 - 1].y,
+			//	vertexDataLoad[faceData[i].vertices2 - 1].z,
+			//	1.0f));
+			//data.push_back(vec4(
+			//	vertexDataLoad[faceData[i].vertices3 - 1].x,
+			//	vertexDataLoad[faceData[i].vertices3 - 1].y,
+			//	vertexDataLoad[faceData[i].vertices3 - 1].z,
+			//	1.0f));
+			//dataTexture.push_back(vec4(
+			//	textureDataLoad[faceData[i].textureUVs1 - 1].x,
+			//	textureDataLoad[faceData[i].textureUVs1 - 1].y,
+			//	0.0f,
+			//	1.0f));
+			//dataTexture.push_back(vec4(
+			//	textureDataLoad[faceData[i].textureUVs2 - 1].x,
+			//	textureDataLoad[faceData[i].textureUVs2 - 1].y,
+			//	0.0f,
+			//	1.0f));
+			//dataTexture.push_back(vec4(
+			//	textureDataLoad[faceData[i].textureUVs3 - 1].x,
+			//	textureDataLoad[faceData[i].textureUVs3 - 1].y,
+			//	0.0f,
+			//	1.0f));
+
+			//dataNormal.push_back(vec4(
+			//	normalDataLoad[faceData[i].normals1 - 1].x,
+			//	normalDataLoad[faceData[i].normals1 - 1].y,
+			//	normalDataLoad[faceData[i].normals1 - 1].z,
+			//	1.0f));
+
+			//dataNormal.push_back(vec4(
+			//	normalDataLoad[faceData[i].normals2 - 1].x,
+			//	normalDataLoad[faceData[i].normals2 - 1].y,
+			//	normalDataLoad[faceData[i].normals2 - 1].z,
+			//	1.0f));
+
+			//dataNormal.push_back(vec4(
+			//	normalDataLoad[faceData[i].normals3 - 1].x,
+			//	normalDataLoad[faceData[i].normals3 - 1].y,
+			//	normalDataLoad[faceData[i].normals3 - 1].z,
+			//	1.0f));
+
 
 
 

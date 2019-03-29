@@ -5,10 +5,9 @@
 
 class ParticleEmitter : public GameObject
 {
-private:
+public:
 	unsigned int m_pNumParticles;
 	Particle* m_pParticles;
-public:
 	ParticleEmitter();
 	~ParticleEmitter();
 

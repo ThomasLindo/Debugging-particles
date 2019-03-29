@@ -6,7 +6,7 @@
 
 class Transform
 {
-protected:
+public:
 	vec3 m_pLocalScale;
 	vec3 m_pLocalRotationEuler;
 	vec3 m_pLocalPosition;
@@ -20,7 +20,6 @@ protected:
 	Transform* m_pParent;
 	std::vector<Transform*> m_pChildren;
 
-public:
 	Transform();
 	~Transform();
 

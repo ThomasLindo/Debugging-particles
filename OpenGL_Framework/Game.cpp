@@ -25,7 +25,7 @@ Game::~Game()
 	delete updateTimer;
 }
 
-constexpr int frameTimeNumSamples = 600;
+constexpr int frameTimeNumSamples = 200;
 int frameTimeCurrSample = 0;
 float frameTimeSamples[frameTimeNumSamples];
 

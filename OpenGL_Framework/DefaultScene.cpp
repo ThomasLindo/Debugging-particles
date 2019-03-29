@@ -32,14 +32,14 @@ void updateParticleForce(ParticleEmitter* particleSystem)
 	{
 		//moved force locations out
 		vec3 forceLoc = forceLocations[k];
-		for (unsigned int idx = particleSystem->getNumParticles()-1; idx >0; --idx)
+		for (unsigned int idx = particleSystem->m_pNumParticles -1; idx >0; --idx)
 		{
 			//split clamp into 3 instead of using vector
-			vec3 force = vec3(1.0f) / (forceLoc - particleSystem->getParticlePosition(idx));
-			clamp(force.x, -10.0f, 10.0f);
+			vec3 force = vec3(1.0f) / (forceLoc - particleSystem->m_pParticles[idx].position);
+			/*clamp(force.x, -10.0f, 10.0f);
 			clamp(force.y, -10.0f, 10.0f);
-			clamp(force.z, -10.0f, 10.0f);
-			particleSystem->applyForceToParticle(idx, force);
+			clamp(force.z, -10.0f, 10.0f);*/
+			particleSystem->m_pParticles[idx].force += force;
 		}
 	}
 }
@@ -132,7 +132,7 @@ void DefaultScene::draw()
 	glDisable(GL_DEPTH_TEST);
 	
 	shaderParticle->bind();
-	shaderParticle->sendUniform("uModel", particles.getLocalToWorld());
+	shaderParticle->sendUniform("uModel", particles.m_pLocalToWorld);
 	//particles.draw takes up a lo of cpu
 	particles.draw();
 	shaderParticle->unbind();
@@ -152,15 +152,15 @@ void DefaultScene::draw()
 	const char* numPrecision = "%.3f";
 	float numPower = f_e;
 	
-	vec3 cameraRotation = cameraPivot.getLocalRotEuler();
+	vec3 cameraRotation = cameraPivot.m_pLocalRotationEuler;
 	if (ImGui::DragFloat3("Camera Rotation", &cameraRotation.x, 0.25f))
 	{
-		cameraPivot.setLocalRot(cameraRotation);
+		cameraPivot.m_pLocalRotationEuler = cameraRotation;
 	}
 
 	if (ImGui::TreeNode("Particle Settings"))
 	{
-		int numOfParticles = (int) p->getNumParticles();
+		int numOfParticles = (int) p->m_pNumParticles;
 		if (ImGui::InputInt("Number of Particles", &numOfParticles))
 		{
 			numOfParticles = clamp(numOfParticles, 1, 10000000);
