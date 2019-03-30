@@ -85,7 +85,7 @@ void Game::draw()
 	UI::Start();
 #endif
 
-	_ActiveScene->draw();
+_ActiveScene->draw();
 
 #if ENABLE_GUI
 	// Framerate Visualizer

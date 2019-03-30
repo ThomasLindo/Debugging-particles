@@ -35,7 +35,15 @@ void updateParticleForce(ParticleEmitter* particleSystem)
 		for (unsigned int idx = particleSystem->m_pNumParticles -1; idx >0; --idx)
 		{
 			//split clamp into 3 instead of using vector
-			vec3 force = vec3(1.0f) / (forceLoc - particleSystem->m_pParticles[idx].position);
+			vec3 pos = particleSystem->m_pParticles[idx].position;
+			float x = forceLoc.x - pos.x;
+			float y = forceLoc.y - pos.y;
+			float z = forceLoc.z - pos.z;
+			vec3 locMinPos = vec3(x, y, z);
+			float fx = 1.0f / locMinPos.x;
+			float fy = 1.0f / locMinPos.y;
+			float fz = 1.0f / locMinPos.z;
+			vec3 force = vec3(fx,fy,fz);
 			/*clamp(force.x, -10.0f, 10.0f);
 			clamp(force.y, -10.0f, 10.0f);
 			clamp(force.z, -10.0f, 10.0f);*/
@@ -106,9 +114,7 @@ void DefaultScene::update(float dt)
 	{
 		float offsetAmount = (textTest.data[i].x + textTest.data[i].y) * alpha;
 		textTest.data[i].color = vec4(
-			sinf(offsetAmount),
-			sinf(offsetAmount + f_pi / 3.0f * 2.0f),
-			sinf(offsetAmount + f_pi / 3.0f * 4.0f),
+			sinf(offsetAmount), sinf(offsetAmount + f_pi / 3.0f * 2.0f), sinf(offsetAmount + f_pi / 3.0f * 4.0f),
 			1.0f);
 		textTest.data[i].color += vec4(1.0f);
 		textTest.data[i].color *= 0.5f;

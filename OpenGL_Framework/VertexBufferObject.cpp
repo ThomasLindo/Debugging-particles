@@ -19,7 +19,7 @@ int VertexArrayObject::addVBO(VertexBufferData descriptor)
 
 VertexBufferData * VertexArrayObject::getVboData(AttributeLocations loc) 
 {
-	for (size_t i = 0; i < vboData.size(); ++i)
+	for (size_t i = vboData.size()-1; i >=0 ; --i)
 	{
 		if (vboData[i].attributeLocation == loc)
 		{
@@ -100,7 +100,8 @@ void VertexArrayObject::reuploadVAO()
 
 		glBindBuffer(GL_ARRAY_BUFFER, vboHandles[i]);
 		//takes a lot of cpu
-		glBufferSubData(GL_ARRAY_BUFFER, 0, attrib->numElements * attrib->sizeOfElement, attrib->data);
+		GLuint attribSize = attrib->numElements * attrib->sizeOfElement;
+		glBufferSubData(GL_ARRAY_BUFFER, 0, attribSize, attrib->data);
 	}
 
 	glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
@@ -112,7 +113,9 @@ void VertexArrayObject::draw() const
 	{
 		this->bind();
 		//glDrawArrays takes a lot of cpu
-		glDrawArrays(primitiveType, 0, vboData[0].numVertices);this->unbind();
+		
+		glDrawArrays(primitiveType, 0, vboData[0].numVertices);
+		this->unbind();
 	}
 }
 
