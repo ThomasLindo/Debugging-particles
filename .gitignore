@@ -1,0 +1,13 @@
+
+OpenGL_Framework/Debug/*
+OpenGL_Framework/Debug/
+Debug/
+OpenGL_Framework/*
+OpenGL_Framework/
+# Really BIG files
+*.ipch
+*.ini
+*.idb
+*.pdb
+*.obj
+*.exe

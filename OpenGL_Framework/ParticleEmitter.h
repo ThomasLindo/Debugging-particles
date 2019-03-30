@@ -3,6 +3,11 @@
 #include "GameObject.h"
 #include "Particle.h"
 
+#include <iostream>
+#include <utility>
+#include <thread>
+#include <chrono>
+
 class ParticleEmitter : public GameObject
 {
 public:
@@ -14,7 +19,9 @@ public:
 	void initialize(unsigned int numParticles);
 	void freeMemory();
 
+	void update2(unsigned int start, unsigned int end, float dt);
 	void update(float dt);
+	void draw2(unsigned int start, unsigned int end);
 	void draw();
 
 	void applyForceToParticle(unsigned int idx, vec3 force);
