@@ -56,8 +56,8 @@ void Game::initializeGame()
 	glClearColor(0, 0, 0, 0); // Black.
 	
 	_Scenes.push_back(new DefaultScene(this));
-	_Scenes.push_back(new TimeSplitterMenuScene(this));
-	_Scenes.push_back(new CGAssignment3Scene(this));
+	/*_Scenes.push_back(new TimeSplitterMenuScene(this));
+	_Scenes.push_back(new CGAssignment3Scene(this));*/
 	_ActiveScene = _Scenes[0];
 }
 

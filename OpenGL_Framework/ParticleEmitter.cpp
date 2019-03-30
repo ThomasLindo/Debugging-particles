@@ -46,48 +46,11 @@ void ParticleEmitter::update(float dt)
 	{
 		// loop through each particle
 		Particle* particle = m_pParticles;
-		for (unsigned int i = 0; i < m_pNumParticles; ++i, ++particle)
+		for (unsigned int i = m_pNumParticles; i >0; --i, ++particle)
 		{
-			if (particle->life <= 0) // if particle has no life remaining
+			if (particle->life > 0) // if particle has no life remaining
 			{
-				// Respawn particle
-				// Note: we are not freeing memory, we are "Recycling" the particles
-				float randomTval;
-
-				particle->acceleration = vec3(0.0f);
-				randomTval = random(0.0f, 1.0f);
-				particle->velocity.x = lerp(velocityMin.x, velocityMax.x, randomTval);
-				randomTval = random(0.0f, 1.0f);
-				particle->velocity.y = lerp(velocityMin.y, velocityMax.y, randomTval);
-				randomTval = random(0.0f, 1.0f);
-				particle->velocity.z = lerp(velocityMin.z, velocityMax.z, randomTval);
-
-				particle->color = colorStart;
-
-				randomTval = random(0.0f, 1.0f);
-				particle->life = lerp(lifeRange.x, lifeRange.y, randomTval);
-				particle->lifetime = particle->life; // Keep track of total lifetime of particle
-
-				randomTval = random(0.0f, 1.0f);
-				particle->mass = lerp(massRange.x, massRange.y, randomTval);
-
-				randomTval = random(0.0f, 1.0f);
-				particle->size = lerp(sizeRange.x, sizeRange.y, randomTval);
-
-				randomTval = random(0.0f, 1.0f); 
-				vec3 emitPos;
-				emitPos.x = lerp(emitPosMin.x, emitPosMax.x, randomTval);
-				randomTval = random(0.0f, 1.0f);
-				emitPos.y = lerp(emitPosMin.y, emitPosMax.y, randomTval);
-				randomTval = random(0.0f, 1.0f);
-				emitPos.z = lerp(emitPosMin.z, emitPosMax.z, randomTval);
-
-				particle->position = getLocalPos() + emitPos;
-
-				particle->force = vec3(0.0f);
-			}
-	
-			// Update physics
+					// Update physics
 	
 			// Update acceleration
 			particle->acceleration = particle->force / particle->mass;
@@ -101,6 +64,30 @@ void ParticleEmitter::update(float dt)
 			particle->life -= dt;
 	
 			// Update visual properties?
+			}
+			else {
+				// Respawn particle
+				// Note: we are not freeing memory, we are "Recycling" the particles
+
+
+				particle->acceleration = vec3(0.0f);
+				particle->velocity = random(velocityMin, velocityMax);
+
+				particle->color = colorStart;
+
+				particle->life = random(lifeRange.x, lifeRange.y);
+				particle->lifetime = particle->life; // Keep track of total lifetime of particle
+
+				particle->mass = random(massRange.x, massRange.y);
+
+				particle->size = random(sizeRange.x, sizeRange.y);
+
+				particle->position = getLocalPos() + random(emitPosMin, emitPosMax);
+
+				particle->force = vec3(0.0f);
+			}
+	
+		
 		}
 		mesh->updateVAO();
 	}
@@ -115,7 +102,7 @@ void ParticleEmitter::draw()
 	}
 	//mesh->draw();
 	Particle* p = m_pParticles;
-	for (unsigned int i = 0; i < m_pNumParticles; ++i, ++p)
+	for (unsigned int i = m_pNumParticles; i >0; --i, ++p)
 	{
 		int* currentShaderProgram = new int;
 		glGetIntegerv(GL_CURRENT_PROGRAM, currentShaderProgram);
@@ -129,11 +116,10 @@ void ParticleEmitter::draw()
 		//takes a lot of cpu
 		mesh->updateVAO();
 		
-		if (p->life >= 0.0f) // if particle is alive, draw it
-		{
+	
 			//takes a lot of cpu (to be expected since it is a draw function?)
 			mesh->draw();
-		}
+		
 		
 		delete currentShaderProgram;
 	}
