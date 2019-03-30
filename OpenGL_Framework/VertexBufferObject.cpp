@@ -70,10 +70,10 @@ void VertexArrayObject::createVAO(GLenum vboUsage)
 	vboHandles.resize(numBuffers);
 
 	glGenBuffers(numBuffers, &vboHandles[0]);
-
-	for (size_t i = 0; i < numBuffers; ++i)
+	VertexBufferData* attrib = vboData.data();
+	for (size_t i = 0; i < numBuffers; ++i,++attrib)
 	{
-		VertexBufferData* attrib = &vboData[i];
+		
 
 		attrib->numVertices = attrib->numElements / attrib->numElementsPerAttribute;
 
@@ -93,9 +93,10 @@ void VertexArrayObject::createVAO(GLenum vboUsage)
 
 void VertexArrayObject::reuploadVAO()
 {
-	for (size_t i = 0; i < vboHandles.size(); ++i)
+	VertexBufferData* attrib = vboData.data();
+	for (size_t i = 0; i < vboHandles.size(); ++i,++attrib)
 	{
-		VertexBufferData* attrib = &vboData[i];
+		
 
 		glBindBuffer(GL_ARRAY_BUFFER, vboHandles[i]);
 		//takes a lot of cpu
