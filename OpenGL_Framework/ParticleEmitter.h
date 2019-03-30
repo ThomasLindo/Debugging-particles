@@ -3,10 +3,7 @@
 #include "GameObject.h"
 #include "Particle.h"
 
-#include <iostream>
-#include <utility>
 #include <thread>
-#include <chrono>
 
 class ParticleEmitter : public GameObject
 {

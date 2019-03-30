@@ -31,8 +31,8 @@ public:
 	float tick()
 	{
 		currentTimeDub = static_cast<double>(glutGet(GLUT_ELAPSED_TIME));
-		elapsedTimeDub = gmtk::min(currentTimeDub - previousTimeDub, 500.0);
-		previousTimeDub =currentTimeDub;
+		elapsedTimeDub = currentTimeDub - previousTimeDub;
+		previousTimeDub = currentTimeDub; 
 		totalTimeDub += elapsedTimeDub * 0.001;
 
 		currentTime = static_cast<float>(currentTimeDub);

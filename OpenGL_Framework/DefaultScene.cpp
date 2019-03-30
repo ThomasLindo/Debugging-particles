@@ -85,14 +85,16 @@ void DefaultScene::initializeScene()
 	textTest.init();
 
 	// Whoops, this is really bad
-	/*Mesh* plane = new Mesh();
+	Mesh* plane = new Mesh();
 	plane->initMeshPlane(16, 16);
 	goPlane.setMesh(plane);
-	goPlane.setTexture(rm::addTexture("grass.jpg"));*/
+	goPlane.setTexture(rm::addTexture("grass.jpg"));
+	goPlane.setScale(vec3(10000.0f, 10000.0f, 10000.0f));
 
 	mainCamera = new Camera();
 	addChild(&cameraPivot);
 	cameraPivot.addChild(mainCamera);
+	cameraPivot.setLocalRot(vec3(-45.0f, 0.0f, 0.0f));
 
 	mainCamera->perspective(60.0f, Window::getAspect(), 0.05f, 1000.0f);
 	//mainCamera->orthographic(-10.0f*getAspect, 10.0f*getAspect, -10.0f, 10.0f, -10.0f, 10.0f);
@@ -129,11 +131,11 @@ void DefaultScene::draw()
 
 	glEnable(GL_DEPTH_TEST);
 	
-	//shaderUnlit->bind();
-	//shaderUnlit->sendUniform("uModel", goPlane.getLocalToWorld());
-	//shaderUnlit->sendUniform("uColor", vec4(vec3(0.4906105f, 0.6732029f, 1.0f) * 0.5f, 1));
-	//shaderUnlit->sendUniform("uTexST", vec4(3, 1, 0, 0));
-	//goPlane.draw();
+	shaderUnlit->bind();
+	shaderUnlit->sendUniform("uModel", goPlane.getLocalToWorld());
+	shaderUnlit->sendUniform("uColor", vec4(vec3(0.4906105f, 0.6732029f, 1.0f)*2.0f, 1));
+	//shaderUnlit->sendUniform("uTexST", vec4(3, 1, 1, 1));
+	goPlane.draw();
 
 	glDisable(GL_DEPTH_TEST);
 	

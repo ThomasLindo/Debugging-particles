@@ -84,18 +84,14 @@ void ParticleEmitter::update2(unsigned int start, unsigned int end, float dt){
 		}
 	}
 }
-void ParticleEmitter::update(float dt)
-{
-	if (m_pParticles && playing) // make sure memory is initialized and system is playing
-	{
+void ParticleEmitter::update(float dt) {
+	// make sure memory is initialized and system is playing
+	if (m_pParticles && playing) {
 		// loop through each particle
 		Particle* particle = m_pParticles;
-		for (unsigned int i = m_pNumParticles; i >0; --i, ++particle)
-		{
-			if (particle->life > 0) // if particle has no life remaining
-			{
-					// Update physics
-	
+		for (unsigned int i = m_pNumParticles; i >0; --i, ++particle){
+			if (particle->life > 0) {
+			// Update physics
 			// Update acceleration
 			particle->acceleration = particle->force / particle->mass;
 			particle->velocity = particle->velocity + (particle->acceleration * dt);
@@ -106,14 +102,12 @@ void ParticleEmitter::update(float dt)
 	
 			// Decrease particle life
 			particle->life -= dt;
-	
+
 			// Update visual properties?
 			}
-			else {
+			else { // if particle has no life remaining
 				// Respawn particle
 				// Note: we are not freeing memory, we are "Recycling" the particles
-
-
 				particle->acceleration = vec3(0.0f);
 				particle->velocity = random(velocityMin, velocityMax);
 
@@ -130,10 +124,8 @@ void ParticleEmitter::update(float dt)
 
 				particle->force = vec3(0.0f);
 			}
-	
-		
 		}
-		/*std::thread t1(&ParticleEmitter::update2,this, 0, (m_pNumParticles / 5), dt);
+		/*std::thread t1(&ParticleEmitter::update2, this, 0, (m_pNumParticles / 5), dt);
 		std::thread t2(&ParticleEmitter::update2, this, (m_pNumParticles / 5), (m_pNumParticles / 5) * 2, dt);
 		std::thread t3(&ParticleEmitter::update2, this, (m_pNumParticles / 5) * 2, (m_pNumParticles / 5) * 3, dt);
 		std::thread t4(&ParticleEmitter::update2, this, (m_pNumParticles / 5) * 3, (m_pNumParticles / 5) * 4, dt);
@@ -192,10 +184,8 @@ void ParticleEmitter::draw()
 		//takes a lot of cpu
 		mesh->updateVAO();
 		
-	
-			//takes a lot of cpu (to be expected since it is a draw function?)
-			mesh->draw();
-		
+		//takes a lot of cpu (to be expected since it is a draw function?)
+		mesh->draw();
 		
 		delete currentShaderProgram;
 	}

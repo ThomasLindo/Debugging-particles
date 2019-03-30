@@ -126,7 +126,7 @@ bool FrameBuffer::CheckFBO()
 	}
 	else
 	{
-		//PrintInfo();
+		PrintInfo();
 		return true;
 	}
 }

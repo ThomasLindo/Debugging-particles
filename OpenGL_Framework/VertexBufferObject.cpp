@@ -57,10 +57,7 @@ void VertexArrayObject::setPrimitiveType(GLenum type)
 
 void VertexArrayObject::createVAO(GLenum vboUsage)
 {
-	if (vaoHandle)
-	{
-		destroy();
-	}
+	if (vaoHandle) { destroy(); }
 	
 	vboUsageType = vboUsage;
 	glGenVertexArrays(1, &vaoHandle);
@@ -73,8 +70,6 @@ void VertexArrayObject::createVAO(GLenum vboUsage)
 	VertexBufferData* attrib = vboData.data();
 	for (size_t i = 0; i < numBuffers; ++i,++attrib)
 	{
-		
-
 		attrib->numVertices = attrib->numElements / attrib->numElementsPerAttribute;
 
 		glEnableVertexAttribArray(attrib->attributeLocation);
@@ -84,7 +79,6 @@ void VertexArrayObject::createVAO(GLenum vboUsage)
 
 		glVertexAttribPointer(attrib->attributeLocation, attrib->numElementsPerAttribute,
 			attrib->elementType, GL_FALSE, 0, 0);
-
 	}
 	glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
 
@@ -96,8 +90,6 @@ void VertexArrayObject::reuploadVAO()
 	VertexBufferData* attrib = vboData.data();
 	for (size_t i = 0; i < vboHandles.size(); ++i,++attrib)
 	{
-		
-
 		glBindBuffer(GL_ARRAY_BUFFER, vboHandles[i]);
 		//takes a lot of cpu
 		GLuint attribSize = attrib->numElements * attrib->sizeOfElement;
