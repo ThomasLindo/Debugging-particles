@@ -44,7 +44,12 @@ public:
 	vec2 massRange;
 
 	vec4 colorStart = vec4(vec3(1.0f), 1.0f);
+	vec4 colorStart2 = vec4(vec3(1.0f, 0.0f, 0.0f), 1.0f);
+	vec4 colorStart3 = vec4(vec3(0.0f, 0.0f, 1.0f), 1.0f);
 	vec4 colorEnd = vec4(vec3(1.0f), 0.0f);
 
 	vec3 position;
+
+	vec3 CollisionPlane;
+	vec3 normal;
 };

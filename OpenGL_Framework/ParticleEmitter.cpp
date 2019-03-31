@@ -95,9 +95,33 @@ void ParticleEmitter::update(float dt) {
 			// Update acceleration
 			particle->acceleration = particle->force / particle->mass;
 			particle->velocity = particle->velocity + (particle->acceleration * dt);
-			particle->position = particle->position + (particle->velocity * dt);
+			vec3 oldpos = particle->position;
+			particle->position = oldpos + (particle->velocity * dt);
 
-			if (particle->position.y < 0 && particle->velocity.y < 0) { particle->velocity.y = -particle->velocity.y; }
+			if ((particle->position.y <= CollisionPlane.y && oldpos.y >  CollisionPlane.y) 
+			 || (particle->position.y >  CollisionPlane.y && oldpos.y <= CollisionPlane.y)) // { particle->velocity.y = -particle->velocity.y; particle->position = oldpos + (particle->velocity * dt); }
+			{
+				//magnitude
+				float mag = sqrt(normal.x*normal.x + normal.y*normal.y + normal.z*normal.z);
+				//normalize
+				vec3 normalN;
+				normalN.x = normal.x / mag;
+				normalN.y = normal.y / mag;
+				normalN.z = normal.z / mag;
+				//dot product
+				vec3 dot;
+				dot.x = normalN.x*particle->velocity.x;
+				dot.y = normalN.y*particle->velocity.y;
+				dot.z = normalN.z*particle->velocity.z;
+				//final calculation
+				vec3 final;
+				final.x = particle->velocity.x - 2 * dot.x*normalN.x;
+				final.y = particle->velocity.y - 2 * dot.y*normalN.y;
+				final.z = particle->velocity.z - 2 * dot.z*normalN.z;
+				//Set velocity
+				particle->velocity = final;
+				particle->position = oldpos + (particle->velocity * dt);
+			}
 	
 			// We've applied the force, let's remove it so it does not get applied next frame
 			particle->force = vec3(0.0f);
@@ -124,6 +148,9 @@ void ParticleEmitter::update(float dt) {
 				particle->size = random(sizeRange.x, sizeRange.y);
 
 				particle->position = m_pLocalPosition + random(emitPosMin, emitPosMax);
+				
+				if (particle->position.y >= CollisionPlane.y) { particle->color = colorStart2; }
+				else { particle->color = colorStart3; }
 
 				particle->force = vec3(0.0f);
 			}

@@ -71,8 +71,12 @@ void DefaultScene::initializeScene()
 	plane->initMeshPlane(16, 16);
 	goPlane.setMesh(plane);
 	goPlane.setTexture(rm::addTexture("grass.jpg"));
-	goPlane.setScale(vec3(10.0f, 10.0f, 10.0f));
+	goPlane.setScale(vec3(10.0f, 1.0f, 10.0f));
+	goPlane.setLocalPos(vec3(0.0f, 0.0f, 0.0f));
+	particles.CollisionPlane = goPlane.getLocalPos();
+	particles.normal = vec3(0.0f, 1.0f, 0.0f);
 	goPlane.update(1);
+
 
 	mainCamera = new Camera();
 	addChild(&cameraPivot);
@@ -113,8 +117,8 @@ void DefaultScene::draw()
 	particles.draw();
 	shaderParticle->unbind();
 
-	glDisable(GL_BLEND);
 
+	glDisable(GL_BLEND);
 
 
 #if ENABLE_GUI
