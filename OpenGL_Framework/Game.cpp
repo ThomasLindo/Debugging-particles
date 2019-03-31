@@ -104,15 +104,6 @@ _ActiveScene->draw();
 	}
 	ImGui::End();
 
-	ImGui::Begin("Scene Selector");
-	const char* scenes[] = { "Default Scene", "TimeSplitters", "Assignment 3" };
-	static int activeScene = 0;
-	if (ImGui::Combo("Scene Select", &activeScene, scenes, IM_ARRAYSIZE(scenes)))
-	{
-		_ActiveScene = _Scenes[activeScene];
-	}
-	ImGui::Text("Also Test GUI");
-	ImGui::End();
 	UI::End();
 #endif
 

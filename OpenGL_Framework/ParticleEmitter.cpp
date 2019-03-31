@@ -89,13 +89,15 @@ void ParticleEmitter::update(float dt) {
 	if (m_pParticles && playing) {
 		// loop through each particle
 		Particle* particle = m_pParticles;
-		for (unsigned int i = m_pNumParticles; i >0; --i, ++particle){
+		for (unsigned int i = m_pNumParticles; i > 0; --i, ++particle){
 			if (particle->life > 0) {
 			// Update physics
 			// Update acceleration
 			particle->acceleration = particle->force / particle->mass;
 			particle->velocity = particle->velocity + (particle->acceleration * dt);
 			particle->position = particle->position + (particle->velocity * dt);
+
+			if (particle->position.y < 0 && particle->velocity.y < 0) { particle->velocity.y = -particle->velocity.y; }
 	
 			// We've applied the force, let's remove it so it does not get applied next frame
 			particle->force = vec3(0.0f);
@@ -105,7 +107,8 @@ void ParticleEmitter::update(float dt) {
 
 			// Update visual properties?
 			}
-			else { // if particle has no life remaining
+			// if particle has no life remaining
+			else {
 				// Respawn particle
 				// Note: we are not freeing memory, we are "Recycling" the particles
 				particle->acceleration = vec3(0.0f);
