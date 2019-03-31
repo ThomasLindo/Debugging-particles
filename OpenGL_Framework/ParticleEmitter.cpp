@@ -123,7 +123,7 @@ void ParticleEmitter::update(float dt) {
 
 				particle->size = random(sizeRange.x, sizeRange.y);
 
-				particle->position = getLocalPos() + random(emitPosMin, emitPosMax);
+				particle->position = m_pLocalPosition + random(emitPosMin, emitPosMax);
 
 				particle->force = vec3(0.0f);
 			}
