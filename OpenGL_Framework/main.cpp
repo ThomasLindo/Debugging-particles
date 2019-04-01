@@ -7,6 +7,7 @@
 #include "IO.h"
 
 Game *theGame;
+float errorCount = 0;
 
 /* function DisplayCallbackFunction(void)
  * Description:
@@ -162,7 +163,8 @@ void CALLBACK OpenGLDebugCallback(GLenum source, GLenum type, GLuint id, GLenum 
 	if (type == GL_DEBUG_TYPE_ERROR)
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0C);
 	
-	std::cout << message << std::endl;
+	errorCount++;
+	std::cout << message << " Error #" << errorCount << std::endl;
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x07);
 }
 
