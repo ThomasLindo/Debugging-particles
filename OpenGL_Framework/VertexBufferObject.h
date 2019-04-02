@@ -102,6 +102,7 @@ public:
 private:
 	GLenum vboUsageType;
 	std::vector<VertexBufferData> vboData;	// Vector for the vbo data and their respective handles
+	
 	std::vector<GLuint> vboHandles;
 	// We separate the handles from the data itself so that you can reuse the same data on the CPU
 	// and send it to 2 separate VAO's for instance, morpth targets with multiple keyframes

@@ -22,7 +22,11 @@ void ParticleEmitter::initialize(unsigned int numParticles)
 	if (numParticles > 0)
 	{
 		m_pParticles = new Particle[numParticles];
-		memset(m_pParticles, 0, sizeof(Particle) * numParticles);
+	/*	for (int i = numParticles - 1; i >= 0;--i,++m_pParticles) {
+			m_pParticles[i] = *new Particle;
+		}*/
+		
+		//memset(m_pParticles, 0, sizeof(Particle) * numParticles);
 		m_pNumParticles = numParticles;
 		mesh = new Mesh();
 		mesh->initParticles(m_pParticles, &position);

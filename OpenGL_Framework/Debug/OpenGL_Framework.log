@@ -1,5 +1,21 @@
-﻿  main.cpp
-  OpenGL_Framework.vcxproj -> C:\Users\100529375\Documents\GitHub\Debugging-particles\Debug\OpenGL_Framework.exe
+﻿  CGAssignment3Scene.cpp
+  DefaultScene.cpp
+  Font.cpp
+  FontMatrixScrolling.cpp
+  Game.cpp
+  GameObject.cpp
+  Mesh.cpp
+  MeshDynamic.cpp
+  ParticleEmitter.cpp
+  PauseEffect.cpp
+  ResourceManager.cpp
+  ShaderProgram.cpp
+  Texture.cpp
+  TimeSplitterMenuScene.cpp
+  VertexBufferObject.cpp
+  main.cpp
+  Generating Code...
+  OpenGL_Framework.vcxproj -> C:\Users\100587671\Desktop\Debugging Particles (1)\Debugging-particles\Debug\OpenGL_Framework.exe
   .\bin\freeglut.dll
   .\bin\freetype.dll
   .\bin\glew32.dll

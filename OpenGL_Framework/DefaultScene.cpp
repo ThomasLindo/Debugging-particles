@@ -28,24 +28,28 @@ std::vector<vec3> forceLocations =
 void updateParticleForce(ParticleEmitter* particleSystem)
 {	
 	//revered loops
-	unsigned int k = 7;
+	
 	//moved force locations out
-	for (unsigned int idx = particleSystem->m_pNumParticles; idx > 0; --k) {
-		vec3 forceLoc = forceLocations[k];
-		//split clamp into 3 instead of using vector
-		vec3 pos = particleSystem->m_pParticles[idx].position;
-		float x = forceLoc.x - pos.x;
-		float y = forceLoc.y - pos.y;
-		float z = forceLoc.z - pos.z;
-		vec3 locMinPos = vec3(x, y, z);
-		float fx = 1.0f / locMinPos.x;
-		float fy = 1.0f / locMinPos.y;
-		float fz = 1.0f / locMinPos.z;
-		vec3 force = vec3(fx, fy,fz);
+	//vec3* vec = forceLocations.data()+1;
+	for (unsigned int idx = particleSystem->m_pNumParticles; idx > 0;--idx) {
+		for (unsigned int k = 7; k > 0;--k) {
+			vec3* forceLoc = forceLocations.data()+k;
+			//vec = vec + k;
+			//split clamp into 3 instead of using vector
+			vec3 pos = particleSystem->m_pParticles[idx].position;
+			float x = forceLoc->x - pos.x;
+			float y = forceLoc->y - pos.y;
+			float z = forceLoc->z - pos.z;
+			vec3 locMinPos = vec3(x, y, z);
+			float fx = 1.0f / locMinPos.x;
+			float fy = 1.0f / locMinPos.y;
+			float fz = 1.0f / locMinPos.z;
+			vec3 force = vec3(fx, fy, fz);
 
-		if (k <= 0) { --idx; k = 7; }
+			//if (k <= 0) { --idx; k = 7; }
 
-		particleSystem->m_pParticles[idx].force += force;
+			particleSystem->m_pParticles[idx].force += force;
+		}
 	}
 }
 
@@ -81,7 +85,7 @@ void DefaultScene::initializeScene()
 	mainCamera = new Camera();
 	addChild(&cameraPivot);
 	cameraPivot.addChild(mainCamera);
-	cameraPivot.setLocalRot(vec3(-45.0f, 0.0f, 0.0f));
+	cameraPivot.setLocalRot(vec3(0.0f, 0.0f, 0.0f));
 
 	mainCamera->perspective(60.0f, Window::getAspect(), 0.05f, 1000.0f);
 	//mainCamera->orthographic(-10.0f*getAspect, 10.0f*getAspect, -10.0f, 10.0f, -10.0f, 10.0f);
