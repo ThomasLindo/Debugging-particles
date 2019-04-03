@@ -164,7 +164,7 @@ void CALLBACK OpenGLDebugCallback(GLenum source, GLenum type, GLuint id, GLenum 
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0C);
 	
 	errorCount++;
-	std::cout << message << " Error #" << errorCount << std::endl;
+//	std::cout << message << " Error #" << errorCount << std::endl;
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x07);
 }
 

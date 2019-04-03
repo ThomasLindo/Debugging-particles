@@ -6,6 +6,7 @@
 #include "IO.h"
 #include "Input.h"
 #include "UI.h"
+#include <iostream>
 
 DefaultScene::DefaultScene(Game * game) : Scene(game)
 {
@@ -34,9 +35,34 @@ void updateParticleForce(ParticleEmitter* particleSystem)
 	for (unsigned int idx = particleSystem->m_pNumParticles; idx > 0;--idx) {
 		for (unsigned int k = 7; k > 0;--k) {
 			vec3* forceLoc = forceLocations.data()+k;
+		//	int diffValue1 = 0;
+		//	int diffValue2 = 0;
 			//vec = vec + k;
 			//split clamp into 3 instead of using vector
 			vec3 pos = particleSystem->m_pParticles[idx].position;
+			std::cout << "Particle #" << idx << ": " << &particleSystem->m_pParticles[idx] << std::endl;
+			std::cout << "Particle #" << idx + 1 << ": " << &particleSystem->m_pParticles[idx + 1] << std::endl;
+			std::cout << "Position: " << &particleSystem->m_pParticles[idx].position << std::endl;
+			std::cout << "PositionX: " << &particleSystem->m_pParticles[idx].position.x << std::endl;
+			std::cout << "PositionY: " << &particleSystem->m_pParticles[idx].position.y << std::endl;
+			std::cout << "PositionZ: " << &particleSystem->m_pParticles[idx].position.z << std::endl;
+			std::cout << "Velocity: " << &particleSystem->m_pParticles[idx].velocity << std::endl;
+			std::cout << "Acceleration: " << &particleSystem->m_pParticles[idx].acceleration << std::endl;
+			std::cout << "Mass: " << &particleSystem->m_pParticles->mass << std::endl;
+			std::cout << "Force: " << &particleSystem->m_pParticles[idx].force << std::endl;
+			vec3 *diffValue;
+			diffValue = &particleSystem->m_pParticles[idx].position;
+
+			std::cout << "Pointer: " << diffValue << std::endl;
+			std::cout << "Pointer*: " << *diffValue << std::endl;
+	//	std::cout << "Difference: " << diffValue << std::endl;
+	//	diffValue = &particleSystem->m_pParticles[idx].position - &particleSystem->m_pParticles[idx].acceleration[idx];
+	//	std::cout << "Difference: " << diffValue << std::endl;
+	//	diffValue = &particleSystem->m_pParticles[idx].position - &particleSystem->m_pParticles[idx].force[idx];
+	//	std::cout << "Difference: " << diffValue << std::endl;
+	//
+	//	diffValue = &particleSystem->m_pParticles[idx + 1] - &particleSystem->m_pParticles[idx];
+	//	std::cout << "Difference: " << diffValue << std::endl;
 			float x = forceLoc->x - pos.x;
 			float y = forceLoc->y - pos.y;
 			float z = forceLoc->z - pos.z;

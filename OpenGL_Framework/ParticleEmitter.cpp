@@ -53,6 +53,7 @@ void ParticleEmitter::update2(unsigned int start, unsigned int end, float dt){
 			// Update physics
 
 	// Update acceleration
+
 			particle->acceleration = particle->force / particle->mass;
 			particle->velocity = particle->velocity + (particle->acceleration * dt);
 			particle->position = particle->position + (particle->velocity * dt);
