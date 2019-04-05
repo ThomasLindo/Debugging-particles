@@ -169,7 +169,7 @@ void DefaultScene::initializeScene()
 	mainCamera = new Camera();
 	addChild(&cameraPivot);
 	cameraPivot.addChild(mainCamera);
-	cameraPivot.setLocalRot(vec3(-45.0f, 0.0f, 0.0f));
+	cameraPivot.setLocalRot(vec3(-1.0f, 0.0f, 0.0f));
 
 	mainCamera->perspective(60.0f, Window::getAspect(), 0.05f, 1000.0f);
 	//mainCamera->orthographic(-10.0f*getAspect, 10.0f*getAspect, -10.0f, 10.0f, -10.0f, 10.0f);
