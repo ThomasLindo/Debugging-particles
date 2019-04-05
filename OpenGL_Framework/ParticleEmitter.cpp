@@ -271,15 +271,16 @@ void ParticleEmitter::update(float dt) {
 				diffValue2++;
 				//Force
 				vec3 force = vec3();
-				force += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
-				force += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / (forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
-				force += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / (forceDistance - (*diffValue2 + 2)));
-				force += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / (forceDistance - (*diffValue2 + 1)), 1.0f / (forceDistance - (*diffValue2 + 2)));
-				force += vec3(1.0f / (forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
-				force += vec3(1.0f / (forceDistance - *diffValue2), 1.0f / (forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
-				force += vec3(1.0f / (forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / (forceDistance - (*diffValue2 + 2)));
-				force += vec3(1.0f / (forceDistance - *diffValue2), 1.0f / (forceDistance - (*diffValue2 + 1)), 1.0f / (forceDistance - (*diffValue2 + 2)));
-				force += force;
+				vec3 *diffValue = &force;
+				*diffValue += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
+				*diffValue += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / (forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
+				*diffValue += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / (forceDistance - (*diffValue2 + 2)));
+				*diffValue += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / (forceDistance - (*diffValue2 + 1)), 1.0f / (forceDistance - (*diffValue2 + 2)));
+				*diffValue += vec3(1.0f / (forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
+				*diffValue += vec3(1.0f / (forceDistance - *diffValue2), 1.0f / (forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
+				*diffValue += vec3(1.0f / (forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / (forceDistance - (*diffValue2 + 2)));
+				*diffValue += vec3(1.0f / (forceDistance - *diffValue2), 1.0f / (forceDistance - (*diffValue2 + 1)), 1.0f / (forceDistance - (*diffValue2 + 2)));
+				*diffValue += force;
 				*diffValue2 = force.x;
 				diffValue2++;
 				*diffValue2 = force.y;
