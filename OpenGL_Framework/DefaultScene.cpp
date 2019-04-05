@@ -26,23 +26,18 @@ std::vector<vec3> forceLocations =
 	vec3(-forceDistance, -forceDistance,  forceDistance), vec3(forceDistance, -forceDistance,  forceDistance), 
 	vec3(-forceDistance,  forceDistance,  forceDistance), vec3(forceDistance,  forceDistance,  forceDistance) 
 };
-unsigned int counter = 0;
+
 void updateParticleForce(ParticleEmitter* particleSystem)
 {	
 	//revered loops
 
 	//vec3 *diffValue;
 	float *diffValue2 = 0;
+	//diffValue2 = &particleSystem->m_pParticles[particleSystem->m_pNumParticles].position.x;
 	//moved force locations out
 	//vec3* vec = forceLocations.data()+1;
 	for (unsigned int idx = particleSystem->m_pNumParticles; idx > 0;--idx) {
-		for (unsigned int k = 7; k > 0;--k) 
-		{
-			vec3* forceLoc = forceLocations.data()+k;
-			//	int diffValue1 = 0;
-			//	int diffValue2 = 0;
-			//vec = vec + k;
-			//split clamp into 3 instead of using vector
+		/*
 			vec3 pos = particleSystem->m_pParticles[idx].position;
 			if (counter > (particleSystem->m_pNumParticles*7) && k == 9007) {
 				//diffValue2 prints out each memory address and the value assigned to each variable
@@ -73,7 +68,7 @@ void updateParticleForce(ParticleEmitter* particleSystem)
 				std::cout << "Pointer*: " << *diffValue2 << std::endl;
 				diffValue2 += 14;
 				
-				/*
+				
 				diffValue = &particleSystem->m_pParticles[idx].position;
 				std::cout << "PointerP: " << diffValue << std::endl;
 				std::cout << "Pointer*: " << *diffValue << std::endl;
@@ -118,25 +113,27 @@ void updateParticleForce(ParticleEmitter* particleSystem)
 				++diffValue2;
 				std::cout << "PointerLt: " << diffValue2 << std::endl;
 				std::cout << "Pointer*: " << *diffValue2 << std::endl;
-				++diffValue2;*/
+				++diffValue2;
 			}
-			else { counter++; }
-			//	std::cout << "Difference: " << diffValue << std::endl;
-			//	diffValue = &particleSystem->m_pParticles[idx].position - &particleSystem->m_pParticles[idx].acceleration[idx];
-			//	std::cout << "Difference: " << diffValue << std::endl;
-			//	diffValue = &particleSystem->m_pParticles[idx].position - &particleSystem->m_pParticles[idx].force[idx];
-			//	std::cout << "Difference: " << diffValue << std::endl;
-			//
-			//	diffValue = &particleSystem->m_pParticles[idx + 1] - &particleSystem->m_pParticles[idx];
-			//	std::cout << "Difference: " << diffValue << std::endl;
+			else { counter++; }*/
+		diffValue2 = &particleSystem->m_pParticles[idx].position.x;
+		//vec3* forceLoc = forceLocations.data() + k;
+		//vec3 force = vec3(1.0f / (forceLoc->x - *diffValue2), 1.0f / (forceLoc->y - (*diffValue2 + 1)), 1.0f / (forceLoc->z - (*diffValue2 + 2)));
+		//vec3 force = vec3(1.0f / *diffValue2, 1.0f / (*diffValue2 + 1), 1.0f / (*diffValue2 + 2));
+		//diffValue2 += 16;
+		vec3 force = vec3();
+		force += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
+		force += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / ( forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
+		force += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / ( forceDistance - (*diffValue2 + 2)));
+		force += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / ( forceDistance - (*diffValue2 + 1)), 1.0f / ( forceDistance - (*diffValue2 + 2)));
+		force += vec3(1.0f / ( forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
+		force += vec3(1.0f / ( forceDistance - *diffValue2), 1.0f / ( forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
+		force += vec3(1.0f / ( forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / ( forceDistance - (*diffValue2 + 2)));
+		force += vec3(1.0f / ( forceDistance - *diffValue2), 1.0f / ( forceDistance - (*diffValue2 + 1)), 1.0f / ( forceDistance - (*diffValue2 + 2)));
 
-			diffValue2 = &particleSystem->m_pParticles[idx].position.x;
-			vec3 force = vec3(1.0f / (forceLoc->x - *diffValue2), 1.0f / (forceLoc->y - (*diffValue2 + 1)), 1.0f / (forceLoc->z - (*diffValue2 + 2)));
-
-			particleSystem->m_pParticles[idx].force += force;
-		}
+		particleSystem->m_pParticles[idx].force += force;
 		//Should make the pointer move to the next value. Does not?
-		diffValue2 -= 39;
+		//diffValue2 -= 39;
 	}
 }
 
