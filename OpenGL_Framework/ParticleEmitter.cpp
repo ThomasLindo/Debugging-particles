@@ -43,6 +43,8 @@ void ParticleEmitter::freeMemory()
 		delete mesh;
 	}
 }
+
+constexpr float forceDistance = 5.0f;
 void ParticleEmitter::update2(unsigned int start, unsigned int end, float dt){
 	Particle* particle = m_pParticles;
 	particle += start;
@@ -52,23 +54,68 @@ void ParticleEmitter::update2(unsigned int start, unsigned int end, float dt){
 		{
 			// Update physics
 
-	// Update acceleration
+			// Update acceleration
+			float *diffValue2 = 0;
+			diffValue2 = &position.x;
 
-			particle->acceleration = particle->force / particle->mass;
-			particle->velocity = particle->velocity + (particle->acceleration * dt);
-			particle->position = particle->position + (particle->velocity * dt);
+			//acceleration
+			diffValue2 += 6;
+			*diffValue2 = (*(diffValue2 + 3) / (*(diffValue2+6)));
+			diffValue2++;
+			*diffValue2 = (*(diffValue2 + 3) / (*(diffValue2+5)));
+			diffValue2++;
+			*diffValue2 = (*(diffValue2 + 3) / (*(diffValue2+4)));
+			diffValue2++;
 
+			//velocity
+			diffValue2 -= 6; 
+			*diffValue2 = *diffValue2 + (*(diffValue2+3) * dt);
+			diffValue2++;
+			*diffValue2 = *diffValue2 + (*(diffValue2+3) * dt);
+			diffValue2++;
+			*diffValue2 = *diffValue2 + (*(diffValue2+3) * dt);
+			diffValue2++;
+
+			//position
+			diffValue2 -= 6;
+			*diffValue2 = *diffValue2 + (*(diffValue2+3) * dt);
+			diffValue2++;
+			*diffValue2 = *diffValue2 + (*(diffValue2+3) * dt);
+			diffValue2++;
+			*diffValue2 = *diffValue2 + (*(diffValue2+3) * dt);
+			diffValue2++;
+
+			diffValue2 += 12;
+			*diffValue2 -= dt;
+
+			//particle->acceleration = particle->force / particle->mass;
+			//particle->velocity = particle->velocity + (particle->acceleration * dt);
+			//particle->position = particle->position + (particle->velocity * dt);
 			// We've applied the force, let's remove it so it does not get applied next frame
-			particle->force = vec3(0.0f);
-
+			//particle->force = vec3(0.0f);
 			// Decrease particle life
-			particle->life -= dt;
+			//particle->life -= dt;
 
 			// Update visual properties?
 		}
 		else {
 			// Respawn particle
 			// Note: we are not freeing memory, we are "Recycling" the particles
+			
+			float *diffValue2 = 0;
+			diffValue2 = &position.x;
+
+			//Force
+			vec3 force = vec3();
+			force += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
+			force += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / (forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
+			force += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / (forceDistance - (*diffValue2 + 2)));
+			force += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / (forceDistance - (*diffValue2 + 1)), 1.0f / (forceDistance - (*diffValue2 + 2)));
+			force += vec3(1.0f / (forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
+			force += vec3(1.0f / (forceDistance - *diffValue2), 1.0f / (forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
+			force += vec3(1.0f / (forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / (forceDistance - (*diffValue2 + 2)));
+			force += vec3(1.0f / (forceDistance - *diffValue2), 1.0f / (forceDistance - (*diffValue2 + 1)), 1.0f / (forceDistance - (*diffValue2 + 2)));
+			force += force;
 
 
 			particle->acceleration = vec3(0.0f);
@@ -84,55 +131,92 @@ void ParticleEmitter::update2(unsigned int start, unsigned int end, float dt){
 			particle->size = random(sizeRange.x, sizeRange.y);
 
 			particle->position = getLocalPos() + random(emitPosMin, emitPosMax);
-
-			particle->force = vec3(0.0f);
 		}
 	}
 }
 void ParticleEmitter::update(float dt) {
+	float *diffValue2 = 0;
 	// make sure memory is initialized and system is playing
 	if (m_pParticles && playing) {
 		// loop through each particle
 		Particle* particle = m_pParticles;
 		for (unsigned int i = m_pNumParticles; i > 0; --i, ++particle){
 			if (particle->life > 0) {
-			// Update physics
-			// Update acceleration
-			particle->acceleration = particle->force / particle->mass;
-			particle->velocity = particle->velocity + (particle->acceleration * dt);
-			vec3 oldpos = particle->position;
-			particle->position = oldpos + (particle->velocity * dt);
+				// Update physics // Update acceleration
+				//particle->acceleration = particle->force / particle->mass;
+				//particle->velocity = particle->velocity + (particle->acceleration * dt);
+				//vec3 oldpos = particle->position;
+				//particle->position = oldpos + (particle->velocity * dt);
+				//// Decrease particle life
+				//particle->life -= dt;
 
-			if ((particle->position.y <= CollisionPlane.y && oldpos.y >  CollisionPlane.y) 
-			 || (particle->position.y >  CollisionPlane.y && oldpos.y <= CollisionPlane.y)) // { particle->velocity.y = -particle->velocity.y; particle->position = oldpos + (particle->velocity * dt); }
-			{
-				//magnitude
-				float mag = sqrt(normal.x*normal.x + normal.y*normal.y + normal.z*normal.z);
-				//normalize
-				vec3 normalN;
-				normalN.x = normal.x / mag;
-				normalN.y = normal.y / mag;
-				normalN.z = normal.z / mag;
-				//dot product
-				vec3 dot;
-				dot.x = normalN.x*particle->velocity.x;
-				dot.y = normalN.y*particle->velocity.y;
-				dot.z = normalN.z*particle->velocity.z;
-				//final calculation
-				vec3 final;
-				final.x = particle->velocity.x - 2 * dot.x*normalN.x;
-				final.y = particle->velocity.y - 2 * dot.y*normalN.y;
-				final.z = particle->velocity.z - 2 * dot.z*normalN.z;
-				//Set velocity
-				particle->velocity = final;
-				particle->position = oldpos + (particle->velocity * dt);
-			}
+				
+				vec3 oldpos = particle->position;
+				diffValue2 = &particle->position.x;
+				//acceleration
+				diffValue2 += 6;
+				*diffValue2 = ((*(diffValue2 + 3)) / (*(diffValue2 + 6)));
+				diffValue2++;
+				*diffValue2 = ((*(diffValue2 + 3)) / (*(diffValue2 + 5)));
+				diffValue2++;
+				*diffValue2 = ((*(diffValue2 + 3)) / (*(diffValue2 + 4)));
+				diffValue2++;
+				//velocity
+				diffValue2 -= 6;
+				*diffValue2 = *diffValue2 + (*(diffValue2 + 3) * dt);
+				diffValue2++;
+				*diffValue2 = *diffValue2 + (*(diffValue2 + 3) * dt);
+				diffValue2++;
+				*diffValue2 = *diffValue2 + (*(diffValue2 + 3) * dt);
+				diffValue2++;
+				//position
+				diffValue2 -= 6;
+				*diffValue2 = *diffValue2 + (*(diffValue2 + 3) * dt);
+				diffValue2++;
+				*diffValue2 = *diffValue2 + (*(diffValue2 + 3) * dt);
+				diffValue2++;
+				*diffValue2 = *diffValue2 + (*(diffValue2 + 3) * dt);
+				diffValue2++;
+				// Decrease particle life
+				diffValue2 += 11;
+				*diffValue2 -= dt;
+				
+
+				diffValue2 -= 13;
+
+				if ((*diffValue2 <= CollisionPlane.y && oldpos.y >  CollisionPlane.y)
+				 || (*diffValue2 >  CollisionPlane.y && oldpos.y <= CollisionPlane.y)) { 
+					*(diffValue2+3) = -*(diffValue2+3);
+					//particle->position = oldpos + (particle->velocity * dt);
+					*(diffValue2-1) = oldpos.x + (*(diffValue2 + 2)* dt);
+					*(diffValue2)   = oldpos.y + (*(diffValue2 + 3)* dt);
+					*(diffValue2+1) = oldpos.z + (*(diffValue2 + 4)* dt);
+				}
+				//{
+				//	//magnitude
+				//	float mag = sqrt(normal.x*normal.x + normal.y*normal.y + normal.z*normal.z);
+				//	//normalize
+				//	vec3 normalN;
+				//	normalN.x = normal.x / mag;
+				//	normalN.y = normal.y / mag;
+				//	normalN.z = normal.z / mag;
+				//	//dot product
+				//	vec3 dot;
+				//	dot.x = normalN.x*particle->velocity.x;
+				//	dot.y = normalN.y*particle->velocity.y;
+				//	dot.z = normalN.z*particle->velocity.z;
+				//	//final calculation
+				//	vec3 final;
+				//	final.x = particle->velocity.x - 2 * dot.x*normalN.x;
+				//	final.y = particle->velocity.y - 2 * dot.y*normalN.y;
+				//	final.z = particle->velocity.z - 2 * dot.z*normalN.z;
+				//	//Set velocity
+				//	particle->velocity = final;
+				//	particle->position = oldpos + (particle->velocity * dt);
+				//}
+				
 	
-			// We've applied the force, let's remove it so it does not get applied next frame
-			particle->force = vec3(0.0f);
 	
-			// Decrease particle life
-			particle->life -= dt;
 
 			// Update visual properties?
 			}
@@ -140,24 +224,69 @@ void ParticleEmitter::update(float dt) {
 			else {
 				// Respawn particle
 				// Note: we are not freeing memory, we are "Recycling" the particles
-				particle->acceleration = vec3(0.0f);
-				particle->velocity = random(velocityMin, velocityMax);
 
-				particle->color = colorStart;
+				diffValue2 = &particle->position.x;
 
-				particle->life = random(lifeRange.x, lifeRange.y);
-				particle->lifetime = particle->life; // Keep track of total lifetime of particle
-
-				particle->mass = random(massRange.x, massRange.y);
-
-				particle->size = random(sizeRange.x, sizeRange.y);
-
-				particle->position = m_pLocalPosition + random(emitPosMin, emitPosMax);
-				
-				if (particle->position.y >= CollisionPlane.y) { particle->color = colorStart2; }
+				//position
+				*diffValue2 = m_pLocalPosition.x + random(emitPosMin.x, emitPosMax.x);
+				diffValue2++;
+				*diffValue2 = m_pLocalPosition.y + random(emitPosMin.y, emitPosMax.y);
+				if (*diffValue2 >= CollisionPlane.y) { particle->color = colorStart2; }
 				else { particle->color = colorStart3; }
+				diffValue2++;
+				*diffValue2 = m_pLocalPosition.z + random(emitPosMin.z, emitPosMax.z);
+				diffValue2++;
+				//velocity
+				*diffValue2 = random(velocityMin.x, velocityMax.x);
+				diffValue2++;
+				*diffValue2 = random(velocityMin.y, velocityMax.y);
+				diffValue2++;
+				*diffValue2 = random(velocityMin.z, velocityMax.z);
+				diffValue2++;
+				//acceleration
+				*diffValue2 = 0.0f;
+				diffValue2++;
+				*diffValue2 = 0.0f;
+				diffValue2++;
+				*diffValue2 = 0.0f;
+				diffValue2++;
+				//Force
+				vec3 force = vec3();
+				force += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
+				force += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / (forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
+				force += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / (forceDistance - (*diffValue2 + 2)));
+				force += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / (forceDistance - (*diffValue2 + 1)), 1.0f / (forceDistance - (*diffValue2 + 2)));
+				force += vec3(1.0f / (forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
+				force += vec3(1.0f / (forceDistance - *diffValue2), 1.0f / (forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
+				force += vec3(1.0f / (forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / (forceDistance - (*diffValue2 + 2)));
+				force += vec3(1.0f / (forceDistance - *diffValue2), 1.0f / (forceDistance - (*diffValue2 + 1)), 1.0f / (forceDistance - (*diffValue2 + 2)));
+				force += force;
+				*diffValue2 = force.x;
+				diffValue2++;
+				*diffValue2 = force.y;
+				diffValue2++;
+				*diffValue2 = force.z;
+				diffValue2++;
+				//mass
+				*diffValue2 = random(massRange.x, massRange.y);
+				diffValue2++;
+				//size
+				*diffValue2 = random(sizeRange.x, sizeRange.y);
+				diffValue2++;
+				//life
+				*diffValue2 = random(lifeRange.x, lifeRange.y);
+				diffValue2++;
+				*diffValue2 = *(diffValue2-1);
+				diffValue2++;
 
-				particle->force = vec3(0.0f);
+				//particle->acceleration = vec3(0.0f);
+				//particle->velocity = random(velocityMin, velocityMax);
+				//particle->color = colorStart;
+				//particle->life = random(lifeRange.x, lifeRange.y);
+				//particle->lifetime = particle->life; // Keep track of total lifetime of particle
+				//particle->mass = random(massRange.x, massRange.y);
+				//particle->size = random(sizeRange.x, sizeRange.y);
+				//particle->position = m_pLocalPosition + random(emitPosMin, emitPosMax);
 			}
 		}
 		/*std::thread t1(&ParticleEmitter::update2, this, 0, (m_pNumParticles / 5), dt);
