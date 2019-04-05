@@ -185,35 +185,53 @@ void ParticleEmitter::update(float dt) {
 				diffValue2 -= 13;
 
 				if ((*diffValue2 <= CollisionPlane.y && oldpos.y >  CollisionPlane.y)
-				 || (*diffValue2 >  CollisionPlane.y && oldpos.y <= CollisionPlane.y)) { 
-					*(diffValue2+3) = -*(diffValue2+3);
-					//particle->position = oldpos + (particle->velocity * dt);
-					*(diffValue2-1) = oldpos.x + (*(diffValue2 + 2)* dt);
-					*(diffValue2)   = oldpos.y + (*(diffValue2 + 3)* dt);
-					*(diffValue2+1) = oldpos.z + (*(diffValue2 + 4)* dt);
-				}
-				//{
-				//	//magnitude
-				//	float mag = sqrt(normal.x*normal.x + normal.y*normal.y + normal.z*normal.z);
-				//	//normalize
-				//	vec3 normalN;
-				//	normalN.x = normal.x / mag;
-				//	normalN.y = normal.y / mag;
-				//	normalN.z = normal.z / mag;
-				//	//dot product
-				//	vec3 dot;
-				//	dot.x = normalN.x*particle->velocity.x;
-				//	dot.y = normalN.y*particle->velocity.y;
-				//	dot.z = normalN.z*particle->velocity.z;
-				//	//final calculation
-				//	vec3 final;
-				//	final.x = particle->velocity.x - 2 * dot.x*normalN.x;
-				//	final.y = particle->velocity.y - 2 * dot.y*normalN.y;
-				//	final.z = particle->velocity.z - 2 * dot.z*normalN.z;
-				//	//Set velocity
-				//	particle->velocity = final;
-				//	particle->position = oldpos + (particle->velocity * dt);
+				 || (*diffValue2 >  CollisionPlane.y && oldpos.y <= CollisionPlane.y)) 
+				//{ 
+				//	*(diffValue2+3) = -*(diffValue2+3);
+				//	//particle->position = oldpos + (particle->velocity * dt);
+				//	*(diffValue2-1) = oldpos.x + (*(diffValue2 + 2)* dt);
+				//	*(diffValue2)   = oldpos.y + (*(diffValue2 + 3)* dt);
+				//	*(diffValue2+1) = oldpos.z + (*(diffValue2 + 4)* dt);
 				//}
+				{
+					//magnitude
+					float mag = sqrt(normal.x*normal.x + normal.y*normal.y + normal.z*normal.z);
+					//normalize
+					vec3 normalN;
+					normalN.x = normal.x / mag;
+					normalN.y = normal.y / mag;
+					normalN.z = normal.z / mag;
+					////dot product
+					//vec3 dot;
+					//dot.x = normalN.x*particle->velocity.x;
+					//dot.y = normalN.y*particle->velocity.y;
+					//dot.z = normalN.z*particle->velocity.z;
+					////final calculation
+					//vec3 final;
+					//final.x = particle->velocity.x - 2 * dot.x * normalN.x;
+					//final.y = particle->velocity.y - 2 * dot.y * normalN.y;
+					//final.z = particle->velocity.z - 2 * dot.z * normalN.z;
+					////Set velocity
+					//particle->velocity = final;
+					//particle->position = oldpos + (particle->velocity * dt);
+
+					//velocity
+					diffValue2 += 2;
+					*(diffValue2) = (*diffValue2) - 2 * ((*diffValue2) * normalN.x) * normalN.x;
+					diffValue2++;
+					*(diffValue2) = (*diffValue2) - 2 * ((*diffValue2) * normalN.y) * normalN.y;
+					diffValue2++;
+					*(diffValue2) = (*diffValue2) - 2 * ((*diffValue2) * normalN.z) * normalN.z;
+					
+					//Position
+					diffValue2 -= 5;
+					*diffValue2 = oldpos.x + (*(diffValue2 + 3)* dt);
+					diffValue2++;
+					*diffValue2 = oldpos.y + (*(diffValue2 + 3)* dt);
+					diffValue2++;
+					*diffValue2 = oldpos.z + (*(diffValue2 + 3)* dt);
+					diffValue2++;
+				}
 				
 	
 	
