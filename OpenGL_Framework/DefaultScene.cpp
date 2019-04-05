@@ -29,40 +29,100 @@ std::vector<vec3> forceLocations =
 void updateParticleForce(ParticleEmitter* particleSystem)
 {	
 	//revered loops
-	
+
+	vec3 *diffValue;
+	float *diffValue2 = 0;
 	//moved force locations out
 	//vec3* vec = forceLocations.data()+1;
 	for (unsigned int idx = particleSystem->m_pNumParticles; idx > 0;--idx) {
-		for (unsigned int k = 7; k > 0;--k) {
+		for (unsigned int k = 7; k > 0;--k) 
+		{
 			vec3* forceLoc = forceLocations.data()+k;
-		//	int diffValue1 = 0;
-		//	int diffValue2 = 0;
+			//	int diffValue1 = 0;
+			//	int diffValue2 = 0;
 			//vec = vec + k;
 			//split clamp into 3 instead of using vector
 			vec3 pos = particleSystem->m_pParticles[idx].position;
 			std::cout << "Particle #" << idx << ": " << &particleSystem->m_pParticles[idx] << std::endl;
 			std::cout << "Particle #" << idx + 1 << ": " << &particleSystem->m_pParticles[idx + 1] << std::endl;
-			std::cout << "Position: " << &particleSystem->m_pParticles[idx].position << std::endl;
-			std::cout << "PositionX: " << &particleSystem->m_pParticles[idx].position.x << std::endl;
-			std::cout << "PositionY: " << &particleSystem->m_pParticles[idx].position.y << std::endl;
-			std::cout << "PositionZ: " << &particleSystem->m_pParticles[idx].position.z << std::endl;
-			std::cout << "Velocity: " << &particleSystem->m_pParticles[idx].velocity << std::endl;
-			std::cout << "Acceleration: " << &particleSystem->m_pParticles[idx].acceleration << std::endl;
-			std::cout << "Mass: " << &particleSystem->m_pParticles->mass << std::endl;
-			std::cout << "Force: " << &particleSystem->m_pParticles[idx].force << std::endl;
-			vec3 *diffValue;
+			std::cout << "Pointer pointing to Address: " << diffValue2 << std::endl;
+			std::cout << "Position: " << &particleSystem->m_pParticles[idx].position << " Pointing to Value: " << particleSystem->m_pParticles[idx].position << std::endl;
+			std::cout << "PositionX: " << &particleSystem->m_pParticles[idx].position.x << " Pointing to Value: " << particleSystem->m_pParticles[idx].position.x << std::endl;
+			std::cout << "PositionY: " << &particleSystem->m_pParticles[idx].position.y << " Pointing to Value: " << particleSystem->m_pParticles[idx].position.y << std::endl;
+			std::cout << "PositionZ: " << &particleSystem->m_pParticles[idx].position.z << " Pointing to Value: " << particleSystem->m_pParticles[idx].position.z << std::endl;
+			std::cout << "Velocity: " << &particleSystem->m_pParticles[idx].velocity << " Pointing to Value: " << particleSystem->m_pParticles[idx].velocity << std::endl;
+			std::cout << "Acceleration: " << &particleSystem->m_pParticles[idx].acceleration << " Pointing to Value: " << particleSystem->m_pParticles[idx].acceleration << std::endl;
+			std::cout << "Mass: " << &particleSystem->m_pParticles[idx].mass << " Pointing to Value: " << particleSystem->m_pParticles[idx].mass << std::endl;
+			std::cout << "Size: " << &particleSystem->m_pParticles[idx].size << " Pointing to Value: " << particleSystem->m_pParticles[idx].size << std::endl;
+			std::cout << "Life: " << &particleSystem->m_pParticles[idx].life << " Pointing to Value: " << particleSystem->m_pParticles[idx].life << std::endl;
+			std::cout << "Lifetime: " << &particleSystem->m_pParticles[idx].lifetime << " Pointing to Value: " << particleSystem->m_pParticles[idx].lifetime << std::endl;
+			std::cout << "Force: " << &particleSystem->m_pParticles[idx].force << " Pointing to Value: " << particleSystem->m_pParticles[idx].force << std::endl;
 			diffValue = &particleSystem->m_pParticles[idx].position;
-
-			std::cout << "Pointer: " << diffValue << std::endl;
+			std::cout << "PointerP: " << diffValue << std::endl;
 			std::cout << "Pointer*: " << *diffValue << std::endl;
-	//	std::cout << "Difference: " << diffValue << std::endl;
-	//	diffValue = &particleSystem->m_pParticles[idx].position - &particleSystem->m_pParticles[idx].acceleration[idx];
-	//	std::cout << "Difference: " << diffValue << std::endl;
-	//	diffValue = &particleSystem->m_pParticles[idx].position - &particleSystem->m_pParticles[idx].force[idx];
-	//	std::cout << "Difference: " << diffValue << std::endl;
-	//
-	//	diffValue = &particleSystem->m_pParticles[idx + 1] - &particleSystem->m_pParticles[idx];
-	//	std::cout << "Difference: " << diffValue << std::endl;
+
+			//diffValue2 prints out each memory address and the value assigned to each variable
+
+			diffValue2 = &particleSystem->m_pParticles[idx].position.x;
+			std::cout << "PointerPx: " << diffValue2 << std::endl;
+			std::cout << "Pointer*: " << *diffValue2 << std::endl;
+			++diffValue2;
+			std::cout << "PointerPy: " << diffValue2 << std::endl;
+			std::cout << "Pointer*: " << *diffValue2 << std::endl;
+			++diffValue2;
+			std::cout << "PointerPz: " << diffValue2 << std::endl;
+			std::cout << "Pointer*: " << *diffValue2 << std::endl;
+			++diffValue2;
+			++diffValue;
+			std::cout << "PointerV: " << diffValue << std::endl;
+			std::cout << "Pointer*: " << *diffValue << std::endl;
+			std::cout << "PointerVx: " << diffValue2 << std::endl;
+			std::cout << "Pointer*: " << *diffValue2 << std::endl;
+			++diffValue2;
+			std::cout << "PointerVy: " << diffValue2 << std::endl;
+			std::cout << "Pointer*: " << *diffValue2 << std::endl;
+			++diffValue2;
+			std::cout << "PointerVz: " << diffValue2 << std::endl;
+			std::cout << "Pointer*: " << *diffValue2 << std::endl;
+			++diffValue2;
+			std::cout << "PointerAx: " << diffValue2 << std::endl;
+			std::cout << "Pointer*: " << *diffValue2 << std::endl;
+			++diffValue2;
+			std::cout << "PointerAy: " << diffValue2 << std::endl;
+			std::cout << "Pointer*: " << *diffValue2 << std::endl;
+			++diffValue2;
+			std::cout << "PointerAz: " << diffValue2 << std::endl;
+			std::cout << "Pointer*: " << *diffValue2 << std::endl;
+			++diffValue2;
+			std::cout << "PointerFx: " << diffValue2 << std::endl;
+			std::cout << "Pointer*: " << *diffValue2 << std::endl;
+			++diffValue2;
+			std::cout << "PointerFy: " << diffValue2 << std::endl;
+			std::cout << "Pointer*: " << *diffValue2 << std::endl;
+			++diffValue2;
+			std::cout << "PointerFz: " << diffValue2 << std::endl;
+			std::cout << "Pointer*: " << *diffValue2 << std::endl;
+			++diffValue2;
+			std::cout << "PointerM: " << diffValue2 << std::endl;
+			std::cout << "Pointer*: " << *diffValue2 << std::endl;
+			++diffValue2;
+			std::cout << "PointerS: " << diffValue2 << std::endl;
+			std::cout << "Pointer*: " << *diffValue2 << std::endl;
+			++diffValue2;
+			std::cout << "PointerL: " << diffValue2 << std::endl;
+			std::cout << "Pointer*: " << *diffValue2 << std::endl;
+			++diffValue2;
+			std::cout << "PointerLt: " << diffValue2 << std::endl;
+			std::cout << "Pointer*: " << *diffValue2 << std::endl;
+			++diffValue2;
+			//	std::cout << "Difference: " << diffValue << std::endl;
+			//	diffValue = &particleSystem->m_pParticles[idx].position - &particleSystem->m_pParticles[idx].acceleration[idx];
+			//	std::cout << "Difference: " << diffValue << std::endl;
+			//	diffValue = &particleSystem->m_pParticles[idx].position - &particleSystem->m_pParticles[idx].force[idx];
+			//	std::cout << "Difference: " << diffValue << std::endl;
+			//
+			//	diffValue = &particleSystem->m_pParticles[idx + 1] - &particleSystem->m_pParticles[idx];
+			//	std::cout << "Difference: " << diffValue << std::endl;
 			float x = forceLoc->x - pos.x;
 			float y = forceLoc->y - pos.y;
 			float z = forceLoc->z - pos.z;
@@ -76,6 +136,8 @@ void updateParticleForce(ParticleEmitter* particleSystem)
 
 			particleSystem->m_pParticles[idx].force += force;
 		}
+		//Should make the pointer move to the next value. Does not?
+		diffValue2 -= 39;
 	}
 }
 
