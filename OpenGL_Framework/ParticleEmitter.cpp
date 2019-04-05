@@ -56,7 +56,6 @@ void ParticleEmitter::update2(unsigned int start, unsigned int end, float dt){
 
 			// Update acceleration
 			float *diffValue2 = 0;
-			float *diffValue3 = &dt;
 			diffValue2 = &position.x;
 
 			//acceleration
@@ -70,24 +69,24 @@ void ParticleEmitter::update2(unsigned int start, unsigned int end, float dt){
 
 			//velocity
 			diffValue2 -= 6; 
-			*diffValue2 = *diffValue2 + (*(diffValue2+3) * *diffValue3);
+			*diffValue2 = *diffValue2 + (*(diffValue2+3) * dt);
 			diffValue2++;
-			*diffValue2 = *diffValue2 + (*(diffValue2+3) * *diffValue3);
+			*diffValue2 = *diffValue2 + (*(diffValue2+3) * dt);
 			diffValue2++;
-			*diffValue2 = *diffValue2 + (*(diffValue2+3) * *diffValue3);
+			*diffValue2 = *diffValue2 + (*(diffValue2+3) * dt);
 			diffValue2++;
 
 			//position
 			diffValue2 -= 6;
-			*diffValue2 = *diffValue2 + (*(diffValue2+3) * *diffValue3);
+			*diffValue2 = *diffValue2 + (*(diffValue2+3) * dt);
 			diffValue2++;
-			*diffValue2 = *diffValue2 + (*(diffValue2+3) * *diffValue3);
+			*diffValue2 = *diffValue2 + (*(diffValue2+3) * dt);
 			diffValue2++;
-			*diffValue2 = *diffValue2 + (*(diffValue2+3) * *diffValue3);
+			*diffValue2 = *diffValue2 + (*(diffValue2+3) * dt);
 			diffValue2++;
 
 			diffValue2 += 12;
-			*diffValue2 -= *diffValue3;
+			*diffValue2 -= dt;
 
 			//particle->acceleration = particle->force / particle->mass;
 			//particle->velocity = particle->velocity + (particle->acceleration * dt);

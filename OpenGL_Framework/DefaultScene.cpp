@@ -31,7 +31,7 @@ void updateParticleForce(ParticleEmitter* particleSystem)
 {	
 	//revered loops
 
-	vec3 *diffValue;
+	//vec3 *diffValue;
 	float *diffValue2 = 0;
 	//diffValue2 = &particleSystem->m_pParticles[particleSystem->m_pNumParticles].position.x;
 	//moved force locations out
@@ -121,16 +121,15 @@ void updateParticleForce(ParticleEmitter* particleSystem)
 		diffValue2 = &particleSystem->m_pParticles[idx].position.x;
 		//Force
 		vec3 force = vec3();
-		diffValue = &force;
-		*diffValue += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
-		*diffValue += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / ( forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
-		*diffValue += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / ( forceDistance - (*diffValue2 + 2)));
-		*diffValue += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / ( forceDistance - (*diffValue2 + 1)), 1.0f / ( forceDistance - (*diffValue2 + 2)));
-		*diffValue += vec3(1.0f / ( forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
-		*diffValue += vec3(1.0f / ( forceDistance - *diffValue2), 1.0f / ( forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
-		*diffValue += vec3(1.0f / ( forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / ( forceDistance - (*diffValue2 + 2)));
-		*diffValue += vec3(1.0f / ( forceDistance - *diffValue2), 1.0f / ( forceDistance - (*diffValue2 + 1)), 1.0f / ( forceDistance - (*diffValue2 + 2)));
-		particleSystem->m_pParticles[idx].force += *diffValue;
+		force += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
+		force += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / ( forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
+		force += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / ( forceDistance - (*diffValue2 + 2)));
+		force += vec3(1.0f / (-forceDistance - *diffValue2), 1.0f / ( forceDistance - (*diffValue2 + 1)), 1.0f / ( forceDistance - (*diffValue2 + 2)));
+		force += vec3(1.0f / ( forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
+		force += vec3(1.0f / ( forceDistance - *diffValue2), 1.0f / ( forceDistance - (*diffValue2 + 1)), 1.0f / (-forceDistance - (*diffValue2 + 2)));
+		force += vec3(1.0f / ( forceDistance - *diffValue2), 1.0f / (-forceDistance - (*diffValue2 + 1)), 1.0f / ( forceDistance - (*diffValue2 + 2)));
+		force += vec3(1.0f / ( forceDistance - *diffValue2), 1.0f / ( forceDistance - (*diffValue2 + 1)), 1.0f / ( forceDistance - (*diffValue2 + 2)));
+		particleSystem->m_pParticles[idx].force += force;
 
 		//velocity
 		//diffValue2 += 3;
